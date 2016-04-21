@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ice Cream!</title>
+</head>
+<body>
+	<h1>Ice Cream!</h1>
+	<form name="Ice Cream" action="https://httpbin.org/post" method="post">
+		
+		<fieldset>
+			<div>
+				<label>Full Name:</label>
+				<input type="text" name="fullname">
+			</div>
+
+			<div>
+		      <label>Phone Number:</label>
+		      <input type="tel" name="phone">
+		    </div>
+
+		    <div>    
+	      		<label>Choose a date:</label>
+	      		<input type="date" name="date">
+	    	</div>
+    	</fieldset>
+
+    	<fieldset>
+			<div>
+				<label>Flavor:</label>
+				<select name="Flavor">
+					<option value="vanilla">Vanilla</option>
+					<option value="chocolate">Chocolate</option>
+					<option value="strawberry">Strawberry</option>
+				</select>
+			</div>
+
+			<div>
+				<label>Additional Toppings:</label>
+				<textarea name="toppings"></textarea>
+			</div>
+
+			<div>
+				<label>Additional Instructions:</label>
+				<textarea name="addinfo"></textarea>
+			</div>
+
+	    	<div>
+	      		<input type="checkbox" name="cb-agree" value="agree">I will eat my ice cream!
+	    	</div>
+    	</fieldset>
+
+		<button type="submit">Submit Order!!</button>
+
+	</form>
+</body>
+</html>
