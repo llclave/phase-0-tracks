@@ -1,0 +1,62 @@
+<snippet>
+	<content>
+<![CDATA[
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>$0</title>
+	</head>
+	<body>
+		<h1>$0</h1>
+		
+		<!--
+		header:
+		<h1></h1> to h6
+
+		paragraph:
+		<p></p>
+
+		link:
+		<a href="[link]"></a>
+
+		image:
+		<img src="" alt="">
+
+		table:
+		<table border="1">
+			<tr>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<td colspan="2"></th>
+			</tr>
+			<tr>
+				<td rowspan="2"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+
+		<form name="" action="[result page link]" method="post">
+			<fieldset>
+				<div>
+					<label></label>
+					<input type="" name="">
+				</div>
+			</fieldset>
+
+		</form>
+		-->
+
+	</body>
+</html>
+
+
+]]>
+
+</content>
+	<tabTrigger>htmlex</tabTrigger>
+</snippet>
