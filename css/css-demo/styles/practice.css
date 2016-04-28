@@ -12,3 +12,11 @@
 .accomplishments {
 	font-size: 0.8em;
 }
+
+#contact-info p:nth-child(2) {
+	color: blue;
+}
+
+ul li {
+	padding: 1px;
+}
