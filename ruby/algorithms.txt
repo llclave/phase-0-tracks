@@ -1,3 +1,5 @@
+Release 0: Equip Your New Robot
+
 - Determine your destination floor
 - If the destination floor is less than your current floor
 	- Press the down call elevator button
@@ -8,10 +10,26 @@
 	- Skip the rest of the steps and end program
 - Until the elevator you called is on your floor and the doors open
 	- Wait for the elevator
-- Enter the elevator and locate the Floor 1 button to set it to the current button
+- Enter the elevator
+- Locate the Floor 1 button to set it to the current button
 - While destination floor button is not equal to the current floor button do the following:
 	- Add one floor to the current button to view the next floor button
 - Press current button/destination floor
 - Until the destination floor is reached and the doors open
 	- Wait
 - Exit elevator
+
+
+Release 1: Find a Real-Life Algorithm
+Walking to Work in NYC
+
+- Exit train station
+- Walk to the North East intersection
+- Set walked blocks to 0 blocks North and 0 blocks East
+- While you have not walked 12 blocks North and 5 blocks East, do the following:
+	- If walked blocks North is less than 12 blocks and North traffic light is green,
+		- Walk one block North to next intersection
+	- Otherwise if walked blocks East is less than 5 blocks and North traffic light is red
+		- Walk one block East to next intersection
+	- Otherwise wait until North traffic light changes color
+- Enter work building
