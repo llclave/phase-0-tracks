@@ -1,0 +1,17 @@
+- Determine your destination floor
+- If the destination floor is less than your current floor
+	- Press the down call elevator button
+- Otherwise if the destination floor is greater than your current floor
+	- Press the up call elevator button
+- Otherwise
+	- You are on the destination floor
+	- Skip the rest of the steps and end program
+- Until the elevator you called is on your floor and the doors open
+	- Wait for the elevator
+- Enter the elevator and locate the Floor 1 button to set it to the current button
+- While destination floor button is not equal to the current floor button do the following:
+	- Add one floor to the current button to view the next floor button
+- Press current button/destination floor
+- Until the destination floor is reached and the doors open
+	- Wait
+- Exit elevator
