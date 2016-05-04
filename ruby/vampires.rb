@@ -19,7 +19,7 @@ puts "=========================================================="
 
 count = 0
 
-while count < numEmploy	
+while count < numEmploy	# loop until all employees are processed
 	# obtain vampire name
 	puts "What is your name?"
 	name = gets.chomp
@@ -91,6 +91,7 @@ while count < numEmploy
 		next
 	end
 
+	# print interview summary
 	puts "\n"
 	puts "-Interview Summary-"
 	puts "What is your name?: #{name}"
@@ -119,7 +120,8 @@ while count < numEmploy
 	# check if age and birth year make sense
 	age = age.to_i
 	birthYear = birthYear.to_i
-	checkAge = 2016 - birthYear
+	current_year = Time.new.year
+	checkAge = current_year - birthYear
 	if checkAge == age
 		ageVerfication = true
 	else
