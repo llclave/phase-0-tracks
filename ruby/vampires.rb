@@ -15,6 +15,8 @@ while (numEmploy.include? ".") || checkifnumber(numEmploy) == false
 end
 numEmploy = numEmploy.to_i
 
+puts "=========================================================="
+
 count = 0
 
 while count < numEmploy	
@@ -71,6 +73,22 @@ while count < numEmploy
 		puts "---------------------------------------"
 		puts "Would you like to enroll in the company’s health insurance? (Y/N)"
 		healthInsurance = gets.chomp
+	end
+
+	# check for suspicious allergies
+	allergy = " "
+	until allergy == "sunshine" || allergy == "done"
+		puts "Name your allergies one at a time. (type \"done\" when you are finished)"
+		allergy = gets.chomp
+		allergy = allergy.downcase
+	end
+
+	if allergy == "sunshine" # if an allergy is sunshine, prints "probably a vampire" and skips to next person
+		puts "\n"
+		puts "Probably a vampire."
+		puts "=========================================================="
+		count += 1
+		next
 	end
 
 	puts "\n"
