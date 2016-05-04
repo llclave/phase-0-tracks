@@ -47,9 +47,9 @@ while count < numEmploy
 	birthYear = gets.chomp
 	# check if input is valid
 	while (birthYear.include? ".") ||checkifnumber(birthYear) == false
-		puts "Error! Please enter a valid age!"
+		puts "Error! Please enter a valid year!"
 		puts "---------------------------------------"
-		puts "How old are you?"
+		puts "What year were you born?"
 		birthYear = gets.chomp
 	end
 
