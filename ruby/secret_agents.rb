@@ -124,6 +124,21 @@ outputs a string, which is an acceptable argument for the decrypt method. It use
 #=========================================================================================
 
 #Release 5
+
+# - Print message that asks user whether they want to encrypt or decrypt password
+# - Accept user input
+# - Force all characters to be lower case in the user input
+# - While user input is not encrypt and it is not decrypt
+#	- Print error message and ask for another input
+# 	- Accept another user input
+# 	- Force all characters to be lower case in the user input
+# - Print message that asks the user to input a password
+# - Accept password input
+# - If the user input was decrypt
+#	- Print and call the decrypt method with the password input as the argument
+# - Or if the user input was encrypt
+#	- Print and call the encrypt method with the password input as the argument
+
 # Begin Driver Code
 puts "Would you like to encrypt or decrypt your password?"
 
