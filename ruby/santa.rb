@@ -1,7 +1,7 @@
 # SANTA CLASS
 class Santa
-	attr_reader :age, :ethnicity
-	attr_accessor :gender
+	attr_reader :ethnicity
+	attr_accessor :gender, :age
 
 	def initialize(gender, ethnicity)
 		puts "Initializing Santa instance ..."
@@ -100,3 +100,20 @@ puts "After change"
 puts "age: #{santas[1].age}"
 santas[1].check
 puts "ethnicity: #{santas[1].ethnicity}"
+
+puts "====================================================="
+puts "\n"
+puts "\n"
+puts "====================================================="
+
+# Release 4 SantaCon Simulator
+example_genders = ["agender", "female", "bigender", "male", "female", "gender fluid", "N/A"]
+example_ethnicities = ["black", "Latino", "white", "Japanese-African", "prefer not to say", "Mystical Creature (unicorn)", "N/A"]
+santa_array = Array.new
+
+200.times { |i|
+	santa_array << Santa.new(example_genders.sample, example_ethnicities.sample)
+	santa_array[i].age = 1 + rand(140)
+	puts "Santa \##{i+1} is #{santa_array[i].age} years old, is #{santa_array[i].gender}, and is #{santa_array[i].ethnicity}."
+	puts "\n"
+}
