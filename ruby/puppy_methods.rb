@@ -1,3 +1,5 @@
+# Names: Margaret Kamimoto & Lloyd Clave
+
 class Puppy
 
   def initialize
@@ -42,3 +44,31 @@ pup1.roll_over
 puts pup1.dog_years(1.5)
 puts pup1.dog_years(5)
 pup1.sit("Beethoven")
+
+
+class Chef
+	def initialize
+		puts "Initializing new chef instance..."
+	end
+	def cook
+		puts "Chef is cooking!"
+	end
+	def cut(ingredients)
+		puts "Chef is cutting #{ingredients}!"
+	end
+end
+
+# chef = Chef.new
+# chef.cook("Ratatouille")
+# chef.cut("Potato")
+
+chefs = 50.times.collect {Chef.new}
+# puts chefs
+# p chefs.length
+# p chefs.class
+
+chefs.each{ |chef|
+ 	chef.cook
+ 	chef.cut("Chicken")
+}
+
