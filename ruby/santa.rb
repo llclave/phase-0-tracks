@@ -16,6 +16,34 @@ class Santa
 		puts "That was a good #{cookie} cookie!" 
 	end
 
+	# attribute-changing methods
+	def celebrate_birthday
+		@age = @age + 1
+	end
+
+	def get_mad_at(reindeer)
+		@reindeer_ranking.insert(@reindeer_ranking.length - 1, @reindeer_ranking.delete_at(@reindeer_ranking.index(reindeer)))
+	end
+
+	def gender=(gender)
+		@gender = gender
+	end
+
+	# getter methods
+	def age
+		@age
+	end
+
+	def ethnicity
+		@ethnicity
+	end
+
+	# check method for testing
+	def check
+		print "reindeer order: #{@reindeer_ranking} \n"
+		puts "gender: #{@gender}"
+	end
+
 end
 
 # TEST CODE
@@ -51,3 +79,21 @@ santas = genders.length.times.collect { |i|
 	Santa.new(genders[i], ethnicities[i])
 }
 puts santas
+
+puts "======"
+puts "Before change"
+puts "age: #{santas[1].age}"
+santas[1].check
+
+puts "------"
+puts "Changing"
+puts "This santa has aged, gets mad at Vixen, and changed genders to '???'"
+santas[1].celebrate_birthday
+santas[1].get_mad_at("Vixen")
+santas[1].gender = "???"
+puts "------"
+
+puts "After change"
+puts "age: #{santas[1].age}"
+santas[1].check
+puts "ethnicity: #{santas[1].ethnicity}"
