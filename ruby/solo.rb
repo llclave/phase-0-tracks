@@ -234,7 +234,7 @@ while action != "q"
 		when "turn"
 			puts "Enter a direction to turn: (left, right, u turn, none)"
 			dir = gets.chomp.downcase
-			until dir == "left" || dir == "right" || dir == "u turn" || dir = "none"
+			until dir == "left" || dir == "right" || dir == "u turn" || dir == "none"
 				puts "Please enter 'left', 'right', 'u turn', or 'none' "
 				dir = gets.chomp.downcase
 			end
