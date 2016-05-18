@@ -49,7 +49,7 @@ class Car
 	attr_accessor :moving, :speed, :direction
 
 	def initialize(type)
-		puts "Initializing car instance type: #{type}..."
+		puts "Preparing #{type}..."
 		@type = type
 		@moving = false
 		@speed = 0
@@ -162,4 +162,115 @@ end
 # car.turn("u turn")
 # puts "- u turn -"
 # puts "#{car.type} | moving:#{car.moving?} | speed:#{car.speed} | direction:#{car.direction}"
+
+
+
+# USER INTERFACE
+car_array = Array.new
+
+puts "Hi! Feel free to test drive any car we have!"
+
+action = ""
+while action != "q"
+	puts "Enter the model you would like to drive!"
+	car_type = gets.chomp
+	puts "\n"
+	car = Car.new(car_type)
+	car_array << car
+	action = ""
+	puts "You are now in your new car!"
+	puts "\n"
+
+	until action == "next" || action == "q"
+		puts "Your #{car.type}'s status:"
+		if car.moving?
+			puts "You are driving #{car.speed} mph, #{car.direction}!"
+			puts "Enter what you would like to do: (accelerate, brake, stop, turn)"
+			puts "Enter 'next' to test drive a new car or 'q' to end program."
+			action = gets.chomp.downcase
+			until action == "accelerate" || action == "brake" || action == "stop" || action == "turn" || action == "next" || action == "q"
+				puts "Invalid input! Please enter 'accelerate', 'brake', 'stop', 'turn', or 'next' !"
+				action = gets.chomp.downcase
+			end
+		else
+			puts "You are facing #{car.direction} and you are currently not moving!"
+			puts "Enter what you would like to do: (accelerate, turn)"
+			puts "Enter 'next' to test drive a new car or 'q' to end program."
+			action = gets.chomp.downcase
+			until action == "accelerate" || action == "turn" || action == "next" || action == "q"
+				puts "Invalid input! Please enter 'accelerate', 'brake', 'stop', 'turn', or 'next' !"
+				action = gets.chomp.downcase
+			end
+		end
+
+		break if action == "next" || action == "q"
+
+		case action
+
+		when "accelerate"
+			puts "Enter a number to accerate by (mph):"
+			speedmph = gets.chomp.to_i
+			until speedmph >= 0
+				puts "Enter a valid positive number!"
+				speedmph = gets.chomp.to_i
+			end
+			car.accelerate(speedmph)
+			puts "You are speeding up by #{speedmph} mph!"
+
+		when "brake"
+			puts "Enter a number to brake by (mph):"
+			brakemph = gets.chomp.to_i
+			until speedmph >= 0
+				puts "Enter a valid positive number!"
+				brakemph = gets.chomp.to_i
+			end
+			car.brake(brakemph)
+			puts "You are braking by #{brakemph} mph."
+
+		when "stop"
+			puts "You are slowing down to a stop!"
+			car.stop
+
+		when "turn"
+			puts "Enter a direction to turn: (left, right, u turn, none)"
+			dir = gets.chomp.downcase
+			until dir == "left" || dir == "right" || dir == "u turn" || dir = "none"
+				puts "Please enter 'left', 'right', 'u turn', or 'none' "
+				dir = gets.chomp.downcase
+			end
+			if dir == "left" || dir == "right"
+				puts "You are turning #{dir}!"
+				car.turn(dir)
+			elsif dir == "u turn"
+				puts "You are making a #{dir}!"
+				car.turn(dir)
+			else
+				puts "You will continue driving the same direction!"	
+			end
+		end
+		puts "\n"
+	end
+	puts "-----------------------------------------------------"
+	break if action == "q"
+end
+
+puts "======================================================"
+puts "List of cars and their statuses:"
+
+car_array.each { |car|
+	if car.moving?
+		puts "The #{car.type} is driving #{car.speed} mph, in the #{car.direction} direction!"
+	else
+		puts "The #{car.type} is facing the #{car.direction} direction but is stopped!"
+	end
+}
+
+
+
+
+
+
+
+
+
 
