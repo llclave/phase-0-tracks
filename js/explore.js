@@ -8,11 +8,11 @@
 
 // REVERSE FUNCTION
 function reverse(stringInput) {
-	reversedString = ''
+	reversedString = '';
 	for (var i = stringInput.length - 1; i >= 0; i--) {
 		reversedString = reversedString + stringInput[i];
 	}
-	return reversedString
+	return reversedString;
 }
 
 
@@ -22,8 +22,8 @@ function reverse(stringInput) {
 
 
 // DRIVER CODE
-var storedReverse = reverse("Chicken noodle soup!")
+var storedReverse = reverse("Chicken noodle soup!");
 
 if (1 + 1 == 2) {
-	console.log(storedReverse)
+	console.log(storedReverse);
 }
