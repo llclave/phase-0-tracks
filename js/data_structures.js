@@ -1,5 +1,13 @@
 var colors = ["blue", "green" , "yellow", "black"];
-var horseNames = ["Ed", "Margaret", "Lloyd", "Bob"];
+var names = ["Ed", "Margaret", "Lloyd", "Bob"];
 
 colors.push("red");
-horseNames.push("Sam");
+names.push("Sam");
+
+var horses = {};
+
+for (var i = 0; i < colors.length; i++) {
+	horses[names[i]] = colors[i];
+}
+
+console.log(horses);
