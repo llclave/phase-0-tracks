@@ -21,6 +21,8 @@ function longestString(stringArray) {
 	}
 	return longest_item;
 }
+// NOTE: This function will only return the first longest phrase. If there are phrases that are of equal length with the longest phrase, only the first one will be returned.
+
 
 
 // Key-Value Match Function PSEUDOCODE 
@@ -48,6 +50,37 @@ function keyValueMatch(obj1, obj2) {
 }
 
 
+
+// Generate Random Array of Strings Function PSEUDOCODE
+// Input: integer for length length of array
+// Steps:
+// 		initialize array of strings to empty array
+// 		initialize alphabet variable to all letters
+// 		FOR each number starting from 0, while the number is less than the input integer
+// 			generate a random number from 1 to 10 (including 1 and 10)
+// 			initialize random string variable and set it to an empty string
+// 			FOR each number starting from 0, while the number is less than the random number
+// 				add a random character from alphabet variable to the random string variable
+// 			add random string to the array of strings
+// Return: array (with a length of input integer) of random strings
+
+// Generate Random Array of Strings Function CODE
+function genRandomStringArray(num) {
+	var stringArray = [];
+	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+	for (var i = 0; i < num; i++) {
+		ranNum = Math.floor((Math.random() * 10) + 1);
+		ranStr = "";
+		for (var j = 0; j < ranNum; j++) {
+			ranStr += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+		}
+		stringArray.push(ranStr);
+	}
+	return stringArray;
+}
+
+
+
 // DRIVER/TEST CODE
 
 // Longest String Function TEST
@@ -64,6 +97,41 @@ console.log("Key-Value Match Function TEST");
 console.log(keyValueMatch({name: "Steven", age: 54},{name: "Tamir", age: 54}));
 console.log(keyValueMatch({name: "Steven", age: 5},{name: "Tamir", age: 54}));
 console.log(keyValueMatch({'age': 54, name: "Steven"},{name: "Tamir", age: 54}));
+
+console.log("");
+
+// Generate Random Array of Strings Function TEST
+console.log("Generate Random Array of Strings Function TEST");
+console.log(genRandomStringArray(5));
+console.log(genRandomStringArray(6));
+console.log(genRandomStringArray(2));
+
+console.log("");
+console.log("");
+
+
+
+// DRIVER CODE FOR RELEASE 2
+
+// Loop 10 times
+// 		call genRandomStringArray function with a random input (from 1 - 10)
+// 		print array output from genRandomStringArray
+// 		call longestString function and input array
+//		print return of longestString function
+
+console.log("DRIVER CODE FOR RELEASE 2");
+for (var i = 0; i < 10; i++) {
+	var randStringArray = genRandomStringArray(Math.floor((Math.random() * 10) + 1));
+	console.log("Random Array: " + randStringArray);
+	var longString = longestString(randStringArray);
+	console.log("Longest Phrase: " + longString);
+	console.log("Done with " + (i+1) +".");
+	console.log("");
+}
+
+
+
+
 
 
 
