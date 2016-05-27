@@ -12,7 +12,7 @@
 // Longest String Function CODE
 function longestString(stringArray) {
 	var longest_item_length = 0;
-	var longest_item = ""
+	var longest_item = "";
 	for (var i = 0; i < stringArray.length; i++) {
 		if (stringArray[i].length > longest_item_length) {
 			longest_item_length = stringArray[i].length;
@@ -41,12 +41,12 @@ function keyValueMatch(obj1, obj2) {
 		for (var key2 in obj2) {
 			if (key1 == key2) {
 				if (obj1[key1] == obj2[key2]) {
-					return true
+					return true;
 				}
 			}
 		}
 	}
-	return false
+	return false;
 }
 
 
