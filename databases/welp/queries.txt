@@ -1,0 +1,51 @@
+You've joined two tables before. How do you join three?
+
+Query:
+SELECT * FROM users, businesses, reviews WHERE reviews.business_id = businesses.id AND reviews.user_id = users.id;
+
+Output:
+id|first_name|last_name|id|name|id|stars|comment|business_id|user_id
+4|Steven|Wonder|6|Sushi World|1|3|average food|6|4
+3|Angela|Jolie|6|Sushi World|2|5|food was amazing!|6|3
+5|Holly|Berry|1|Grundy Hollow Wedding Chapel|3|1|worst day of my life|1|5
+5|Holly|Berry|3|The Beagle Nightclub|4|5|better than the wedding chapel|3|5
+1|Bradford|Pitt|5|Plumbing by Janet|5|4|nice|5|1
+2|Mandy|Kaling|2|Amir's Towing|6|5|you can tow me again|2|2
+7|Denzel|George|2|Amir's Towing|7|0|never showed up|2|7
+6|Merryl|Streepman|4|Lotus Yoga|8|5|I can touch my toes now|4|6
+1|Bradford|Pitt|3|The Beagle Nightclub|9|4|there were so many beagles but it needs more|3|1
+3|Angela|Jolie|6|Sushi World|10|2|I'm allergic to dogs but the instructor insisted|6|3
+
+
+
+There are some repetitive columns if we choose to view all fields. Choose instead to just view the user's names, the business name, the star rating, and the comment.
+
+Query:
+SELECT users.first_name, users.last_name, businesses.name, reviews.stars, reviews.comment FROM users JOIN reviews JOIN businesses ON reviews.business_id = businesses.id AND reviews.user_id = users.id;
+
+Output:
+first_name|last_name|name|stars|comment
+Steven|Wonder|Sushi World|3|average food
+Angela|Jolie|Sushi World|5|food was amazing!
+Holly|Berry|Grundy Hollow Wedding Chapel|1|worst day of my life
+Holly|Berry|The Beagle Nightclub|5|better than the wedding chapel
+Bradford|Pitt|Plumbing by Janet|4|nice
+Mandy|Kaling|Amir's Towing|5|you can tow me again
+Denzel|George|Amir's Towing|0|never showed up
+Merryl|Streepman|Lotus Yoga|5|I can touch my toes now
+Bradford|Pitt|The Beagle Nightclub|4|there were so many beagles but it needs more
+Angela|Jolie|Sushi World|2|I'm allergic to dogs but the instructor insisted
+
+
+
+How do you view the data of all three tables for just one particular business? 
+You need to add the command: WHERE businesses.name=“<business name>”
+
+Example Query:
+SELECT businesses.name, users.first_name, users.last_name, reviews.stars, reviews.comment FROM users JOIN reviews JOIN businesses ON reviews.business_id = businesses.id AND reviews.user_id = users.id WHERE businesses.name=“Sushi World”;
+
+Output:
+name|first_name|last_name|stars|comment
+Sushi World|Steven|Wonder|3|average food
+Sushi World|Angela|Jolie|5|food was amazing!
+Sushi World|Angela|Jolie|2|I'm allergic to dogs but the instructor insisted
