@@ -1,0 +1,154 @@
+RELEASE 2
+
+1. Display the information in one table (either table is fine).
+command:
+SELECT * FROM car_models;
+
+output:
+id|name|horsepower|used|manufacturer_id
+1|S550 Sedan|449|false|1
+2|CC 2.0T|200|false|2
+3|Charger SE|292|false|3
+4|Challenger SXT Plus|305|true|3
+5|C300|241|true|1
+6|Passat V6|280|false|2
+7|Touareg V6|280|true|2
+8|GLS450 SUV|362|false|1
+9|Dart SXT|184|false|3
+
+
+
+2. Update an item that meets some condition (you can choose a condition that makes sense).
+command:
+UPDATE car_models SET used="true" WHERE name="Dart SXT";
+SELECT * FROM car_models;
+
+output:
+id|name|horsepower|used|manufacturer_id
+1|S550 Sedan|449|false|1
+2|CC 2.0T|200|false|2
+3|Charger SE|292|false|3
+4|Challenger SXT Plus|305|true|3
+5|C300|241|true|1
+6|Passat V6|280|false|2
+7|Touareg V6|280|true|2
+8|GLS450 SUV|362|false|1
+9|Dart SXT|184|true|3
+
+
+
+3. Display the information in both tables using one query.
+command:
+SELECT * FROM car_manufacturers, car_models WHERE car_models.manufacturer_id = car_manufacturers.id;
+
+output:
+id|name|id|name|horsepower|used|manufacturer_id
+1|Mercedes-Benz|1|S550 Sedan|449|false|1
+2|Volkswagen|2|CC 2.0T|200|false|2
+3|Dodge|3|Charger SE|292|false|3
+3|Dodge|4|Challenger SXT Plus|305|true|3
+1|Mercedes-Benz|5|C300|241|true|1
+2|Volkswagen|6|Passat V6|280|false|2
+2|Volkswagen|7|Touareg V6|280|true|2
+1|Mercedes-Benz|8|GLS450 SUV|362|false|1
+3|Dodge|9|Dart SXT|184|true|3
+
+
+
+4. Display a narrower selection of columns (fewer columns than all of them, in other words) from both tables using one query.
+command:
+SELECT car_manufacturers.name, car_models.name, car_models.horsepower, car_models.used FROM car_models JOIN car_manufacturers ON car_models.manufacturer_id = car_manufacturers.id;
+
+output:
+name|name|horsepower|used
+Mercedes-Benz|S550 Sedan|449|false
+Volkswagen|CC 2.0T|200|false
+Dodge|Charger SE|292|false
+Dodge|Challenger SXT Plus|305|true
+Mercedes-Benz|C300|241|true
+Volkswagen|Passat V6|280|false
+Volkswagen|Touareg V6|280|true
+Mercedes-Benz|GLS450 SUV|362|false
+Dodge|Dart SXT|184|true
+
+
+
+5. Delete an item that meets some condition (you can choose a condition that makes sense).
+command:
+DELETE FROM car_models WHERE name = "Passat V6";
+SELECT * FROM car_models;
+
+output:
+id|name|horsepower|used|manufacturer_id
+1|S550 Sedan|449|false|1
+2|CC 2.0T|200|false|2
+3|Charger SE|292|false|3
+4|Challenger SXT Plus|305|true|3
+5|C300|241|true|1
+7|Touareg V6|280|true|2
+8|GLS450 SUV|362|false|1
+9|Dart SXT|184|true|3
+
+
+
+
+RELEASE 3
+
+INNER JOIN - Returns all rows when there is at least one match in both tables
+command:
+SELECT man.name, mod.name FROM car_manufacturers man INNER JOIN car_models mod ON mod.manufacturer_id = man.id;
+
+output:
+Mercedes-Benz|S550 Sedan
+Volkswagen|CC 2.0T
+Dodge|Charger SE
+Dodge|Challenger SXT Plus
+Mercedes-Benz|C300
+Volkswagen|Touareg V6
+Mercedes-Benz|GLS450 SUV
+Dodge|Dart SXT
+
+
+
+Left JOIN - Return all rows from the left table, and the matched rows from the right
+command:
+SELECT man.name, mod.name FROM car_manufacturers man LEFT JOIN car_models mod ON mod.manufacturer_id = man.id;
+
+output:
+Mercedes-Benz|C300
+Mercedes-Benz|GLS450 SUV
+Mercedes-Benz|S550 Sedan
+Volkswagen|CC 2.0T
+Volkswagen|Touareg V6
+Dodge|Challenger SXT Plus
+Dodge|Charger SE
+Dodge|Dart SXT
+
+
+
+RIGHT JOIN - Return all rows from the right table, and the matched rows from the left
+command:
+SELECT man.name, mod.name FROM car_manufacturers man RIGHT JOIN car_models mod ON mod.manufacturer_id = man.id;
+
+output:
+Error: RIGHT and FULL OUTER JOINs are not currently supported
+
+
+
+FULL JOIN - Return all rows when there is a match in one of the tables
+command:
+SELECT man.name, mod.name FROM car_manufacturers man FULL JOIN car_models mod ON mod.manufacturer_id = man.id;
+
+output:
+Error: RIGHT and FULL OUTER JOINs are not currently supported
+
+
+
+
+note: NULL value can be placed if there is no corresponding data.
+
+
+
+References:
+http://www.sql-join.com/sql-join-types
+http://www.w3schools.com/sql/sql_join.asp
