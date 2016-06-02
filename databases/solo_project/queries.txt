@@ -1,3 +1,5 @@
+RELEASE 2
+
 1. Display the information in one table (either table is fine).
 command:
 SELECT * FROM car_models;
@@ -88,3 +90,65 @@ id|name|horsepower|used|manufacturer_id
 9|Dart SXT|184|true|3
 
 
+
+
+RELEASE 3
+
+INNER JOIN - Returns all rows when there is at least one match in both tables
+command:
+SELECT man.name, mod.name FROM car_manufacturers man INNER JOIN car_models mod ON mod.manufacturer_id = man.id;
+
+output:
+Mercedes-Benz|S550 Sedan
+Volkswagen|CC 2.0T
+Dodge|Charger SE
+Dodge|Challenger SXT Plus
+Mercedes-Benz|C300
+Volkswagen|Touareg V6
+Mercedes-Benz|GLS450 SUV
+Dodge|Dart SXT
+
+
+
+Left JOIN - Return all rows from the left table, and the matched rows from the right
+command:
+SELECT man.name, mod.name FROM car_manufacturers man LEFT JOIN car_models mod ON mod.manufacturer_id = man.id;
+
+output:
+Mercedes-Benz|C300
+Mercedes-Benz|GLS450 SUV
+Mercedes-Benz|S550 Sedan
+Volkswagen|CC 2.0T
+Volkswagen|Touareg V6
+Dodge|Challenger SXT Plus
+Dodge|Charger SE
+Dodge|Dart SXT
+
+
+
+RIGHT JOIN - Return all rows from the right table, and the matched rows from the left
+command:
+SELECT man.name, mod.name FROM car_manufacturers man RIGHT JOIN car_models mod ON mod.manufacturer_id = man.id;
+
+output:
+Error: RIGHT and FULL OUTER JOINs are not currently supported
+
+
+
+FULL JOIN - Return all rows when there is a match in one of the tables
+command:
+SELECT man.name, mod.name FROM car_manufacturers man FULL JOIN car_models mod ON mod.manufacturer_id = man.id;
+
+output:
+Error: RIGHT and FULL OUTER JOINs are not currently supported
+
+
+
+
+note: NULL value can be placed if there is no corresponding data.
+
+
+
+References:
+http://www.sql-join.com/sql-join-types
+http://www.w3schools.com/sql/sql_join.asp
