@@ -8,8 +8,9 @@ class Date
   end
 end
 
-# initialize database and table
-db = SQLite3::Database.new("gym_log.db")
+# initialize database and tables
+# create logs table
+db = SQLite3::Database.new("log.db")
 create_table_cmd = <<-SQL
   CREATE TABLE IF NOT EXISTS logs(
     id INTEGER PRIMARY KEY,
@@ -24,6 +25,26 @@ create_table_cmd = <<-SQL
   )
 SQL
 db.execute(create_table_cmd)
+
+# create dates table
+create_table_cmd = <<-SQL
+  CREATE TABLE IF NOT EXISTS dates(
+    id INTEGER PRIMARY KEY,
+    date VARCHAR(255),
+    UNIQUE(id, date)
+  )
+SQL
+db.execute(create_table_cmd)
+
+# add dates to dates table
+date_from  = Date.parse('2016-06-01')
+date_to    = Date.parse('2017-06-01')
+date_range = date_from..date_to
+date_range.each {|date|
+  db.execute("INSERT INTO dates (date) VALUES ('#{date.to_s}')")
+}
+
+
 
 # calulate day method
 def calc_day(date)
@@ -59,14 +80,23 @@ add_log(db, Date.today.to_s, "bench press", "N/A", "N/A", 5, 5, 135)
 add_log(db, "2016-06-03", "squat", "N/A", "N/A", 5, 5, 135)
 delete_log(db, "2016-06-03", "squat")
 update_log(db, "distance", "changed", Date.today.to_s, "bench press")
+#p db.execute("SELECT id from logs where date='2016-06-07'")[0][0].class
 
+
+
+
+# SELECT id from logs where date="2016-06-07";
 # .mode column
 # .headers on
 
 
 
-
-
+# If you never want to have duplicates, you should declare this as a table constraint:
+# CREATE TABLE bookmarks(
+#    users_id INTEGER,
+#    lessoninfo_id INTEGER,
+#    UNIQUE(users_id, lessoninfo_id)
+#);
 
 
 
