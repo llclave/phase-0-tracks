@@ -92,6 +92,13 @@ def update_log(db, attr_name_to_change, update_value, date, activity)
   db.execute("UPDATE logs SET #{attr_name_to_change}=? WHERE date_id='#{date_id}' AND activity=?", [update_value, activity])
 end
 
+# print all logs
+def print_entire_log(db)
+  rows = db.execute2("SELECT d.date, l.day, l.activity, l.time, l.distance, l.sets, l.reps, l.weight_lbs FROM dates d LEFT JOIN logs l WHERE l.date_id = d.id")
+  rows.each { |row|
+    puts "%-12s | %-12s | %-25s | %-10s | %-10s | %-7s | %-7s" % [row [0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
+  }
+end 
 
 
 
@@ -105,22 +112,17 @@ add_log(db, "2016-08-14", "thingy", "N/A", "N/A", 5, 5, 135)
 delete_log(db, "2016-06-03", "squat")
 update_log(db, "distance", "changed", Date.today.to_s, "bench press")
 #p db.execute("SELECT id from dates where date='2016-06-07'")[0][0].class
+print_entire_log(db)
 
 
 
 
-# SELECT id from logs where date="2016-06-07";
+
 # .mode column
 # .headers on
 
 
 
-# If you never want to have duplicates, you should declare this as a table constraint:
-# CREATE TABLE bookmarks(
-#    users_id INTEGER,
-#    lessoninfo_id INTEGER,
-#    UNIQUE(users_id, lessoninfo_id)
-#);
 
 
 
