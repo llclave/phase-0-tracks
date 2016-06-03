@@ -68,7 +68,7 @@ if $db.execute("SELECT loaded_dates from history where id=1")[0][0] == 0
 end
 
 
-
+# METHODS
 # add log method
 def add_log(db, date, activity, time, distance, sets, reps, weight)
   day_of_week = calc_day(date)
@@ -114,92 +114,17 @@ end
 
 
 # TEST CODE
-add_log($db, Date.today.to_s, "bench press", "N/A", "N/A", 5, 5, 135)
-add_log($db, "2016-06-03", "squat", "N/A", "N/A", 5, 5, 135)
-add_log($db, "2016-06-04", "deadlift", "N/A", "N/A", 5, 5, 135)
-add_log($db, "2016-07-04", "thing", "N/A", "N/A", 5, 5, 135)
-add_log($db, "2016-08-14", "thingy", "N/A", "N/A", 5, 5, 135)
+# add_log($db, Date.today.to_s, "bench press", "N/A", "N/A", 5, 5, 135)
+# add_log($db, "2016-06-03", "squat", "N/A", "N/A", 5, 5, 135)
+# add_log($db, "2016-06-04", "deadlift", "N/A", "N/A", 5, 5, 135)
+# add_log($db, "2016-07-04", "thing", "N/A", "N/A", 5, 5, 135)
+# add_log($db, "2016-08-14", "thingy", "N/A", "N/A", 5, 5, 135)
 # delete_log($db, "2016-06-03", "squat")
 # update_log($db, "distance", "changed", Date.today.to_s, "bench press")
 # print_entire_log($db)
 
-
-
-add_log($db, Date.today.to_s, "1", "N/A", "N/A", 5, 5, 135)
-add_log($db, Date.today.to_s, "2", "N/A", "N/A", 5, 5, 135)
-add_log($db, Date.today.to_s, "3", "N/A", "N/A", 5, 5, 135)
-
-# USER INTERFACE
-
-loop {
-  puts "Enter 'add', 'update', 'delete', 'print', or enter 'q' to end program."
-  choice = gets.chomp
-  break if choice == "q"
-  case choice
-
-  when "add"
-    print_entire_log($db)
-
-    puts "Enter date in YYYY-MM-DD format."
-    date = gets.chomp
-
-    puts "Enter activity."
-    activity = gets.chomp
-
-    puts "Enter time or press <enter> if not applicable."
-    time = gets.chomp
-
-    puts "Enter distance or press <enter> if not applicable."
-    distance = gets.chomp
-
-    puts "Enter sets or press <enter> if not applicable."
-    sets = gets.chomp
-
-    puts "Enter reps or press <enter> if not applicable."
-    reps = gets.chomp
-
-    puts "Enter weight or press <enter> if not applicable."
-    weight = gets.chomp
-
-    add_log($db, date, activity, time, distance, sets, reps, weight)
-
-  when "update"
-    print_entire_log($db)
-
-    puts "Enter the date of the row you want to update."
-    date = gets.chomp
-
-    puts "Enter the activity of the row you want to update."
-    activity = gets.chomp
-
-    puts "Enter the column you want to update."
-    attr_name_to_change = gets.chomp
-
-    puts "Enter what you would like to update its value to."
-    update_value = gets.chomp
-
-    update_log($db, attr_name_to_change, update_value, date, activity)
-
-  when "delete"
-    print_entire_log($db)
-
-    puts "Enter the date of the row you want to delete."
-    date = gets.chomp
-
-    puts "Enter the activity of the row you want to delete OR press <enter> to delete all rows with that date."
-    activity = gets.chomp
-
-    if activity == ""
-      activity = "177asdfgsdc7280"
-    end
-
-    delete_log($db, date, activity)
-
-  when "print"
-    print_entire_log($db)
-  end
-  puts "\n"
-}
-
+# add_log($db, Date.today.to_s, "1", "N/A", "N/A", 5, 5, 135)
+# add_log($db, Date.today.to_s, "2", "N/A", "N/A", 5, 5, 135)
+# add_log($db, Date.today.to_s, "3", "N/A", "N/A", 5, 5, 135)
 
 
