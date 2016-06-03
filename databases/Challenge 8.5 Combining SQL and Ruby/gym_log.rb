@@ -2,73 +2,94 @@
 require 'sqlite3'
 require 'date'
 
+# included date class to add dayname method which determines day from date
 class Date
   def dayname
      DAYNAMES[self.wday]
   end
 end
+# calulate day method
+def calc_day(date)
+  DateTime.parse(date).to_date.dayname
+end
 
-# initialize database and tables
+
+# INITIALIZE DATABASE AND TABLES
 # create logs table
 db = SQLite3::Database.new("log.db")
 create_table_cmd = <<-SQL
   CREATE TABLE IF NOT EXISTS logs(
     id INTEGER PRIMARY KEY,
-    date VARCHAR(255),
     day VARCHAR(255),
     activity VARCHAR(255),
     time VARCHAR(255),
     distance VARCHAR(255),
     sets INT,
     reps INT,
-    weight_lbs FLOAT
+    weight_lbs FLOAT,
+    date_id INT
   )
 SQL
 db.execute(create_table_cmd)
 
-# create dates table
+# create history table
 create_table_cmd = <<-SQL
-  CREATE TABLE IF NOT EXISTS dates(
+  CREATE TABLE IF NOT EXISTS history(
     id INTEGER PRIMARY KEY,
-    date VARCHAR(255),
-    UNIQUE(id, date)
+    loaded_dates INT
   )
 SQL
 db.execute(create_table_cmd)
-
-# add dates to dates table
-date_from  = Date.parse('2016-06-01')
-date_to    = Date.parse('2017-06-01')
-date_range = date_from..date_to
-date_range.each {|date|
-  db.execute("INSERT INTO dates (date) VALUES ('#{date.to_s}')")
-}
+db.execute("INSERT INTO history (loaded_dates) VALUES (0)")
 
 
+# conditional statement to determine whether to load dates into database
+if db.execute("SELECT loaded_dates from history where id=1")[0][0] == 0
+  # create dates table
+  create_table_cmd = <<-SQL
+    CREATE TABLE IF NOT EXISTS dates(
+      id INTEGER PRIMARY KEY,
+      date VARCHAR(255),
+      UNIQUE(date)
+    )
+  SQL
+  db.execute(create_table_cmd)
 
-# calulate day method
-def calc_day(date)
-  DateTime.parse(date).to_date.dayname
+  # add dates to dates table
+
+  date_from  = Date.parse('2016-01-01')
+  date_to    = Date.parse('2040-01-01')
+  date_range = date_from..date_to
+  date_range.each {|date|
+    db.execute("INSERT OR IGNORE INTO dates (date) VALUES ('#{date.to_s}')")
+  }
+
+  db.execute("UPDATE history SET loaded_dates=1 WHERE id=1")
 end
+
+
 
 # add log method
 def add_log(db, date, activity, time, distance, sets, reps, weight_lbs)
   day_of_week = calc_day(date)
-  db.execute("INSERT INTO logs (date, day, activity, time, distance, sets, reps, weight_lbs) VALUES (?, '#{day_of_week}', ?, ?, ?, ?, ?, ?)", [date, activity, time, distance, sets, reps, weight_lbs])
+  date_id = db.execute("SELECT id from dates where date='#{date}'")[0][0]
+  db.execute("INSERT INTO logs (day, activity, time, distance, sets, reps, weight_lbs, date_id) VALUES ('#{day_of_week}', ?, ?, ?, ?, ?, ?, #{date_id})", [activity, time, distance, sets, reps, weight_lbs])
 end
 
 # delete log method
-def delete_log(db, date, activity=1777280)
-  if activity == 1777280
-    db.execute("DELETE FROM logs WHERE ?=date", [date])
+def delete_log(db, date, activity="177asdfgsdc7280")
+  date_id = db.execute("SELECT id from dates where date=?", [date])[0][0]
+  if activity == "177asdfgsdc7280"
+    db.execute("DELETE FROM logs WHERE date_id='#{date_id}'")
   else
-    db.execute("DELETE FROM logs WHERE date=? AND activity=?", [date, activity])
+    db.execute("DELETE FROM logs WHERE date_id='#{date_id}' AND activity=?", [activity])
   end
 end
 
 # update log method
 def update_log(db, attr_name_to_change, update_value, date, activity)
-  db.execute("UPDATE logs SET #{attr_name_to_change}=? WHERE date=? AND activity=?", [update_value, date, activity])
+  date_id = db.execute("SELECT id from dates where date=?", [date])[0][0]
+  db.execute("UPDATE logs SET #{attr_name_to_change}=? WHERE date_id='#{date_id}' AND activity=?", [update_value, activity])
 end
 
 
@@ -78,9 +99,12 @@ end
 
 add_log(db, Date.today.to_s, "bench press", "N/A", "N/A", 5, 5, 135)
 add_log(db, "2016-06-03", "squat", "N/A", "N/A", 5, 5, 135)
+add_log(db, "2016-06-04", "deadlift", "N/A", "N/A", 5, 5, 135)
+add_log(db, "2016-07-04", "thing", "N/A", "N/A", 5, 5, 135)
+add_log(db, "2016-08-14", "thingy", "N/A", "N/A", 5, 5, 135)
 delete_log(db, "2016-06-03", "squat")
 update_log(db, "distance", "changed", Date.today.to_s, "bench press")
-#p db.execute("SELECT id from logs where date='2016-06-07'")[0][0].class
+#p db.execute("SELECT id from dates where date='2016-06-07'")[0][0].class
 
 
 
