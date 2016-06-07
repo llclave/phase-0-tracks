@@ -15,23 +15,7 @@ end
 
 
 # INITIALIZE DATABASE AND TABLES
-# create logs table
 $db = SQLite3::Database.new("log.db")
-create_table_cmd = <<-SQL
-  CREATE TABLE IF NOT EXISTS logs(
-    id INTEGER PRIMARY KEY,
-    day VARCHAR(255),
-    activity VARCHAR(255),
-    time VARCHAR(255),
-    distance VARCHAR(255),
-    sets INT,
-    reps INT,
-    weight VARCHAR(255),
-    date_id INT
-  )
-SQL
-$db.execute(create_table_cmd)
-
 # create history table
 create_table_cmd = <<-SQL
   CREATE TABLE IF NOT EXISTS history(
@@ -66,6 +50,23 @@ if $db.execute("SELECT loaded_dates from history where id=1")[0][0] == 0
 
   $db.execute("UPDATE history SET loaded_dates=1 WHERE id=1")
 end
+
+# create logs table
+create_table_cmd = <<-SQL
+  CREATE TABLE IF NOT EXISTS logs(
+    id INTEGER PRIMARY KEY,
+    day VARCHAR(255),
+    activity VARCHAR(255),
+    time VARCHAR(255),
+    distance VARCHAR(255),
+    sets INT,
+    reps INT,
+    weight VARCHAR(255),
+    date_id INT,
+    FOREIGN KEY (date_id) REFERENCES dates(id)
+  )
+SQL
+$db.execute(create_table_cmd)
 
 
 # METHODS
@@ -114,14 +115,14 @@ end
 
 
 # TEST CODE
-# add_log($db, Date.today.to_s, "bench press", "N/A", "N/A", 5, 5, 135)
-# add_log($db, "2016-06-03", "squat", "N/A", "N/A", 5, 5, 135)
-# add_log($db, "2016-06-04", "deadlift", "N/A", "N/A", 5, 5, 135)
-# add_log($db, "2016-07-04", "thing", "N/A", "N/A", 5, 5, 135)
-# add_log($db, "2016-08-14", "thingy", "N/A", "N/A", 5, 5, 135)
-# delete_log($db, "2016-06-03", "squat")
-# update_log($db, "distance", "changed", Date.today.to_s, "bench press")
-# print_entire_log($db)
+add_log($db, Date.today.to_s, "bench press", "N/A", "N/A", 5, 5, 135)
+add_log($db, "2016-06-03", "squat", "N/A", "N/A", 5, 5, 135)
+add_log($db, "2016-06-04", "deadlift", "N/A", "N/A", 5, 5, 135)
+add_log($db, "2016-07-04", "thing", "N/A", "N/A", 5, 5, 135)
+add_log($db, "2016-08-14", "thingy", "N/A", "N/A", 5, 5, 135)
+delete_log($db, "2016-06-03", "squat")
+update_log($db, "distance", "changed", Date.today.to_s, "bench press")
+print_entire_log($db)
 
 # add_log($db, Date.today.to_s, "1", "N/A", "N/A", 5, 5, 135)
 # add_log($db, Date.today.to_s, "2", "N/A", "N/A", 5, 5, 135)
