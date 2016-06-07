@@ -44,3 +44,71 @@ get '/students/:id' do
   student = db.execute("SELECT * FROM students WHERE id=?", [params[:id]])[0]
   student.to_s
 end
+
+# A /contact route that displays an address (you can make up the address).
+get '/contact' do
+  "123 Lollipop Lane, Candy Fields, Florida 77777"
+end
+
+# A /great_job route that can take a person's name as a query parameter (not a route parameter) and say "Good job, [person's name]!". If the query parameter is not present, the route simply says "Good job!"
+get '/great_job' do
+  name = params[:name]
+  if name
+    "Good job, #{name}!"
+  else
+    "Good job!"
+  end
+end
+
+# A route that uses route parameters to add two numbers and respond with the result. The data types are tricky here -- when will the data need to be (or arrive as) a string?
+get '/:number_1/:number_2' do
+  number_1 = params[:number_1].to_i
+  number_2 = params[:number_2].to_i
+  result = number_1 + number_2
+  result.to_s
+end
+
+# Optional bonus: Make a route that allows the user to search the database in some way -- maybe for students who have a certain first name, or some other attribute. If you like, you can simply modify the home page to take a query parameter, and filter the students displayed if a query parameter is present.
+get '/searchname' do
+  name = params[:name]
+  if name
+    students = db.execute("SELECT * FROM students WHERE name=?", name)[0]
+    students.to_s
+  else
+    "no query parameter"
+  end
+end
+
+get '/searchcampus' do
+  campus = params[:campus]
+  if campus
+    students = db.execute("SELECT * FROM students WHERE campus=?", campus)
+    response = ""
+    students.each do |student|
+    response << "ID: #{student['id']}<br>"
+    response << "Name: #{student['name']}<br>"
+    response << "Age: #{student['age']}<br>"
+    response << "Campus: #{student['campus']}<br><br>"
+    end
+    response
+  else
+    "no query parameter"
+  end
+end
+
+get '/searchage' do
+  age = params[:age]
+  if age
+    students = db.execute("SELECT * FROM students WHERE age=?", age)
+    response = ""
+    students.each do |student|
+    response << "ID: #{student['id']}<br>"
+    response << "Name: #{student['name']}<br>"
+    response << "Age: #{student['age']}<br>"
+    response << "Campus: #{student['campus']}<br><br>"
+    end
+    response
+  else
+    "no query parameter"
+  end
+end
