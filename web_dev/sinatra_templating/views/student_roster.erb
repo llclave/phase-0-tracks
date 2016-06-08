@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>student roster</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>Student Roster!</h1>
+  <p>This is the roster of students.</p>
+  <p><a href="roster/survey">Link to survey!</a></p>
+  <table border="1px">
+    <tr>
+      <th>Name</th>
+      <th>Campus</th>
+      <th>Age</th>
+    </tr>
+    <% @students.each do |student| %>
+    <tr>
+      <td><%= student['name'] %></td> 
+      <td><%= student['campus'] %></td> 
+      <td><%= student['age'] %></td>
+    </tr>
+    <% end %>
+  </table>
+</body>
+</html>
