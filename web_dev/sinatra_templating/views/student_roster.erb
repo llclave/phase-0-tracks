@@ -7,18 +7,18 @@
 <body>
   <h1>Student Roster!</h1>
   <p>This is the roster of students.</p>
-  <table>
-    <th>
-      <td>Name</td>
-      <td>Campus</td>
-      <td>Age</td>
-    </th>
+  <table border="1px">
+    <tr>
+      <th>Name</th>
+      <th>Campus</th>
+      <th>Age</th>
+    </tr>
     <% @students.each do |student| %>
-      <tr>
-        <td><%= student['name'] %></td> 
-        <td><%= student['campus'] %></td> 
-        <td><%= student['age'] %></td>
-      </tr>
+    <tr>
+      <td><%= student['name'] %></td> 
+      <td><%= student['campus'] %></td> 
+      <td><%= student['age'] %></td>
+    </tr>
     <% end %>
   </table>
 </body>
